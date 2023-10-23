@@ -2,12 +2,17 @@
 Parse a custom report from Athena and assign each procedure to the appropriate authorizations employee.
 
 ## Problem
-Providers utilizing the athenahealth EHR have few options for managing prior authorizations. The first is to outsource the entire process to Athena itself, providing a streamlined workflow and one-stop-shop for managing authorizations and precertifications. Leaving the task up to Athena is straightforward: pay a monthly fee and leave the rest to an outsourced team. The debate on outsourced vs. in-house teams is beyond the scope of a GitHub repo, but I will say this: if my experiences trying to get information from Athena regarding billing processes or payment posting are anything like the experience one would have conversing with their authorizations team, then I know it would be difficult to speak with a representative who provides meaningful insight and isn't reading from a poorly cut, copy, and pasted script.
+Providers utilizing the athenahealth EHR have few options for managing prior authorizations. One option is to an external tool such as SharePoint to manage prior authorizations. The downside to utilizing third-party reporting is that a procedure may fall through the cracks and go unworked until just days before the patient's appointment. In the worst case, this leads to a facility turning a frustrated and helpless patient away at surgery time.
 
-The provider's other option is to staff an in-house authorizations team and develop their own workflow. However, the technical problem of managing these authorizations then presents itself. The athenahealth EHR does not provide a straightforward way to organize authorizations or set reminders to follow up with the more involved cases. Each authorizations employee has a worklist which displays their current orders but the EHR does not allow the list to be sorted in any way. The employee can download an inbox report every day, but this system is inefficient; after just one month they would have dozens of spreadsheets to manage, leading to a different version of the same organization problem. The spreadsheet fiasco only gets worse when an employee is out of the office and another employee needs to review one of their urgent cases but is unable to locate the _right_ spreadsheet on their colleague's workstation.
+It would be helpful to send the in-house authorizations team a list of all scheduled procedures the week before the procedure so the authorization status can be verified.
 
-## Solution
-The prior authorizations team needs an efficient way to extract all assigned patient cases from the EHR and view them in an organized fashion which doesn't require managing countless spreadsheets. In fact, if we did away with spreadsheets entirely then we wouldn't have to spend time coaching our less technically-inclined colleagues on how to sort and filter columns. It would also be nice if any member of the team could update and view everyone's list in case an employee was out sick or on vacation. The solution, our team determined, was to utilize SharePoint lists. With SharePoint lists (SPL from here on), the authorizations team is presented with a simple GUI for managing all of their cases. The SPL can be customized to show only those relevant fields which would be important to the authorizations team while retaining the ability to keep track of more technical metrics in the background. The workflow is as follows:
+## Workflow
 
-  - Download the pre-built report from athenahealth
-  - Use a Python script to clean the report, identify employee/provider assignments, and upload the data to the SPL
+One solution for providers using athenahealth who want an efficient way of managing prior authorizations is to implement the following workflow: download a pre-built report from the EHR, process the report using a Python script, and send the filtered report to the authorizations team via email. Ideally this report would be sent to the appropriate employees Monday the week before surgery. For example, a report generated on Monday January 1st would show all procedures scheduled from Monday January 8th through Friday January 12th. This allows for enough time, in many cases, to get missed procedures authorized before the patient is to be seen.
+
+## Technologies Used
+
+Athenahealth EHR
+Python 3.10
+Microsoft 365 SharePoint
+
