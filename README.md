@@ -14,7 +14,7 @@ One solution for providers using athenahealth who want an efficient way of manag
 
 ## Technologies Used
 
-Athenahealth EHR
-Python 3.10
-Microsoft 365 SharePoint
++ Athenahealth EHR
++ Python 3.10
++ Microsoft 365 SharePoint
 
